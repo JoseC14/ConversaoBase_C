@@ -10,6 +10,7 @@ int main() {
 	int potencia;
 	int cont, opcao;
 	char resto[2];
+	char digitoFinal[2];
 	char hexadecimal[255];
 	
 
@@ -17,9 +18,11 @@ int main() {
 	printf("*CONVERSÃO DE HEXADECIMAL PARA DECIMAL E VICE-VERSA*\n");
 	printf("****************************************************\n");
 	while (1) {
-		printf("Digite uma opção\n 1 - Hexadecimal para Decimal \n 2 - Decimal para Hexadecimal");
+		printf("Digite uma opção\n 1 - Hexadecimal para Decimal \n 2 - Decimal para Hexadecimal\n");
 		scanf("%d", &opcao);
-
+		hexadecimal[0] = '\0';
+		digitoFinal[0] = '\0';
+		decimal     = 0;
 		if (opcao == 1) {
 			cont = strlen(hexadecimal);
 			printf("Digite o número hexadecimal: ");
@@ -60,15 +63,38 @@ int main() {
 		else if (opcao == 2) {
 			printf("Digite um número na base decimal: ");
 			scanf("%d", &decimal);
-			while ((decimal / 16) != 0) {
 
-				resto[0] = (decimal % 16) + '0';
+			while ((decimal / 16) != 0) {
+				if (decimal % 16 == 10) {
+					resto[0] = 'A';
+				}
+				else if (decimal % 16 == 11) {
+					resto[0] = 'B';
+				}
+				else if (decimal % 16 == 12) {
+					resto[0] = 'C';
+				}
+				else if (decimal % 16 == 13) {
+					resto[0] = 'D';
+				}
+				else if (decimal % 16 == 14) {
+					resto[0] = 'E';
+				}
+				else if (decimal % 16 == 15) {
+					resto[0] = 'F';
+				}
+				else {
+					resto[0] = (decimal % 16) + '0';
+				}
+				
 				resto[1] = '\0';
 				strcat(hexadecimal, resto);
 
 				decimal = decimal / 16;
 			}
-
+	        digitoFinal[0] = decimal + '0';
+			digitoFinal[1] = '\0';
+			strcat(hexadecimal, digitoFinal);
 			printf("%s\n", reverseString(hexadecimal));
 
 	}
